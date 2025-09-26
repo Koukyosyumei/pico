@@ -1,5 +1,5 @@
 [workspace]
-members = ["tendermint/*", "fibonacci/*", "aggregator/*"]
+members = ["tendermint/*", "fibonacci/*", "aggregator/*", "hellhellow/"]
 resolver = "2"
 
 [workspace.package]
