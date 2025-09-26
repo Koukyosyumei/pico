@@ -1,5 +1,5 @@
 use alloy_sol_types::SolType;
-use pico_sdk::{client::DefaultProverClient, init_logger};
+use pico_sdk::{client::DefaultProverClient, client::BabyBearProverClient, init_logger};
 use std::{borrow::BorrowMut, fs};
 
 pub fn load_elf(path: &str) -> Vec<u8> {
@@ -18,7 +18,7 @@ fn main() {
     println!("elf length: {}", elf.len());
 
     // Initialize the prover client
-    let client = DefaultProverClient::new(&elf);
+    let client = BabyBearProverClient::new(&elf);
     let mut stdin_builder = client.new_stdin_builder(); //.get_stdin_builder(); // Shared instance
 
     // Set up input and generate proof
