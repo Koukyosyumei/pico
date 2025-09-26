@@ -492,7 +492,7 @@ impl RiscvEmulator {
             }
         }
 
-        let done = self.state.pc == 0
+        let done = self.state.pc % 2013265921 == 0
             || self.state.pc.wrapping_sub(self.program.pc_base)
                 >= (self.program.instructions.len() * 4) as u32;
         if done && self.is_unconstrained() {
@@ -561,6 +561,7 @@ impl RiscvEmulator {
 
         // Loop until we've emulated CHUNK_BATCH_SIZE chunks.
         loop {
+            println!("clk: {}, pc: {}", self.state.clk, self.state.pc);
             if self.emulate_cycle(
                 |done, new_record| {
                     deferred_state.lock().unwrap().complete_and_return_record(
@@ -573,6 +574,8 @@ impl RiscvEmulator {
                 },
                 &mut last_record_time,
             )? {
+                println!("Execution terminated:");
+                println!("clk: {}, pc: {}", self.state.clk, self.state.pc);
                 done = true;
                 break;
             }
