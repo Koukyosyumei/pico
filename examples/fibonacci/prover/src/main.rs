@@ -21,10 +21,10 @@ fn main() {
     stdin_builder.borrow_mut().write(&n);
 
     // Generate proof
-    let proof = client.prove(stdin_builder).expect("Failed to generate proof"); //_fast().expect("Failed to generate proof");
+    let proof = client.prove_fast(stdin_builder).expect("Failed to generate proof"); //_fast().expect("Failed to generate proof");
 
     // Decodes public values from the proof's public value stream.
-    let public_buffer = proof.0.pv_stream.unwrap();
+    let public_buffer = proof.pv_stream.unwrap();
     let public_values = PublicValuesStruct::abi_decode(&public_buffer, true).unwrap();
 
     // Verify the public values
