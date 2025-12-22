@@ -111,7 +111,7 @@ where
     chips: Arc<[MetaChip<Val<SC>, C>]>,
 
     /// Base prover
-    prover: BaseProver<SC, C>,
+    pub prover: BaseProver<SC, C>,
 
     /// Base verifier
     verifier: BaseVerifier<SC, C>,
