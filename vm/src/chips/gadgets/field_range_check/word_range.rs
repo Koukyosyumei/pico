@@ -116,7 +116,7 @@ impl<F: Field> FieldWordRangeChecker<F> {
                     .when(cols.upper_all_one.result)
                     .assert_zero(bottom_bits);
                 builder
-                    .when(is_real)
+                    .when(is_real.clone())
                     .when(cols.upper_all_one.result)
                     .assert_zero(value[0] + value[1] + value[2]);
             }
@@ -140,7 +140,7 @@ impl<F: Field> FieldWordRangeChecker<F> {
                 // so I am leaving this uncommented because commenting it introduces an underconstrained variable
                 // cols.upper_all_one.
                 IsZeroGadget::<F>::eval(builder, byte_sum, cols.upper_all_one, is_real.clone());
-                builder.when(is_real).assert_zero(cols.upper_all_one.result)
+                builder.when(is_real.clone()).assert_zero(cols.upper_all_one.result)
             }
             _ => {
                 unimplemented!("Unsupported field type")
