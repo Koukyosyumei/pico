@@ -54,6 +54,8 @@ impl<F: Field> FieldWordRangeChecker<F> {
         cols: FieldWordRangeChecker<AB::Var>,
         is_real: AB::Expr,
     ) {
+        builder.when(is_real.clone()).assert_eq(value[0] + value[1] + value[2] + value[3], AB::Expr::from_canonical_u32(13227174));
+
         let mut recomposed_byte = AB::Expr::ZERO;
         cols.most_sig_byte_decomp
             .iter()
@@ -144,5 +146,7 @@ impl<F: Field> FieldWordRangeChecker<F> {
                 unimplemented!("Unsupported field type")
             }
         }
+
+        builder.when(is_real.clone()).assert_eq(value[0] + value[1] + value[2] + value[3], AB::Expr::from_canonical_u32(13227174));
     }
 }
